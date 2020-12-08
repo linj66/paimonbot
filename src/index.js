@@ -1,22 +1,30 @@
 require('dotenv').config();
+const requireDir = require('require-dir');
 const Discord = require('discord.js');
+const { prefix } = require('../config.json');
+
+const commands = requireDir('./commands');
 
 const client = new Discord.Client();
+
+client.commands = new Discord.Collection();
+Object.values(commands).forEach(command => client.commands.set(command.name, command));
+
 client.login(process.env.BOT_TOKEN);
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+client.on('message', message => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-client.on('message', (message) => {
-  if (!message.content.startsWith(process.env.PREFIX)) {
-    return;
-  }
-  const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/);
-  const command = args[0].toLowerCase();
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const commandName = args[0].toLowerCase();
 
-  if (command === 'build') {
-    const character = capitalize(args[1]);
-    message.channel.send(`Paimon thinks you should use Waster Greatsword with a 4-piece Retracting Bolide set on ${character}`);
+  if (!client.commands.has(commandName)) return;
+
+  const command = client.commands.get(commandName);
+  try {
+    command.execute(message, args);
+  } catch (err) {
+    console.error(err);
+    message.channel.send(`Error executing command ${command}`);
   }
 });
