@@ -1,4 +1,12 @@
 {
+  "name": "paimonbot",
+  "version": "0.0.1",
+  "description": "Discord bot for Genshin Impact",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
   "dependencies": {
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
