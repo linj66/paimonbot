@@ -1,4 +1,3 @@
-require('dotenv').config();
 const requireDir = require('require-dir');
 const Discord = require('discord.js');
 const { prefix } = require('../config.json');
