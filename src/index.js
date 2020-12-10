@@ -10,7 +10,7 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 Object.values(commands).forEach(command => client.commands.set(command.name, command));
 
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
