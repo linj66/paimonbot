@@ -72,7 +72,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ecs_task_def.json
+        task-definition: src/server/ecs_task_def.json
         container-name: paimonbot-server
         image: ${{ steps.build-image.outputs.image }}
 

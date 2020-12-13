@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Discord bot for Genshin Impact",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "discord.js": "^12.5.1",
