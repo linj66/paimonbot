@@ -1,6 +1,6 @@
 const requireDir = require('require-dir');
 const Discord = require('discord.js');
-const { prefix } = require('../config.json');
+const { prefix } = require('./config.json');
 
 const commands = requireDir('./commands');
 
@@ -9,7 +9,11 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 Object.values(commands).forEach(command => client.commands.set(command.name, command));
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+if (process.env.NODE_ENV === 'production') {
+  client.login(process.env.DISCORD_BOT_TOKEN);
+} else {
+  client.login(process.env.DISCORD_BOT_DEV_TOKEN);
+}
 
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
