@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'arrow-parens': ['error', 'as-needed'],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };
