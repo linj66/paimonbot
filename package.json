@@ -5,6 +5,7 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "cd src/server && nodemon index.js",
+    "format": "prettier-standard --format",
     "postinstall": "./scripts/postinstall.sh"
   },
   "devDependencies": {

@@ -1,20 +1,12 @@
-const Discord = require('discord.js')
 const Commando = require('discord.js-commando')
 const path = require('path')
-const requireDir = require('require-dir')
 const config = require('./config.json')
 require('dotenv').config()
-
-//const commands = requireDir('./commands')
 
 const client = new Commando.CommandoClient({
   owner: '188870878426169344',
   commandPrefix: config.prefix
 })
-
-// Register available commands to Discord bot
-//client.commands = new Discord.Collection()
-//Object.values(commands).forEach(command => client.commands.set(command.name, command))
 
 if (process.env.NODE_ENV === 'production') {
   client.login(process.env.DISCORD_BOT_TOKEN)

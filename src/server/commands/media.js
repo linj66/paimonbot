@@ -1,11 +1,15 @@
-const { DiscordAPIError } = require('discord.js')
+const Commando = require('discord.js-commando')
 const { mediaStatus } = require('../consts')
 
-module.exports = {
-  name: 'media',
-  description:
-    'Toggle channel and content stream of Genshin Impact media on or off',
-  async execute (message, args) {
+module.exports = class MediaCommand extends Commando.Command {
+  constructor (client) {
+    super(client, {
+      name: 'media',
+      description: 'Toggle consumption of Genshin Impact content stream'
+    })
+  }
+
+  async run (message, args) {
     const status = args[1]
     const server = message.guild
     const channelManager = server.channels
