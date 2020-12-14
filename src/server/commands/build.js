@@ -11,6 +11,10 @@ module.exports = class BuildCommand extends Commando.Command {
 
   async run (message, args) {
     const character = args[1]
-    message.channel.send(`Paimon doesn't know what the best build is for ${_.startCase(_.toLower(character))}`)
+    message.channel.send(
+      `Paimon doesn't know what the best build is for ${_.startCase(
+        character.toLowerCase()
+      )}`
+    )
   }
 }
