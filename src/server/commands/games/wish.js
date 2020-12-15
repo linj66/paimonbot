@@ -4,7 +4,9 @@ module.exports = class WishCommand extends Commando.Command {
   constructor (client) {
     super(client, {
       name: 'wish',
-      description: 'Wish simulator'
+      description: 'Wish simulator',
+      group: 'games',
+      memberName: 'wish'
     })
   }
 
