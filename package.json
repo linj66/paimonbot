@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cd src/server && nodemon index.js",
     "format": "prettier-standard --format",
+    "mongo": "./scripts/mongolocal.sh",
     "postinstall": "./scripts/postinstall.sh"
   },
   "devDependencies": {
