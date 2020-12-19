@@ -2,7 +2,7 @@ const Commando = require('discord.js-commando')
 const MongoClient = require('mongodb').MongoClient
 const { mediaStatus } = require('../consts')
 
-const url = 'mongodb://localhost:27017'
+const url = 'mongodb://paimonbot-mongo:27017'
 const dbName = 'paimondb';
 const dbClient = new MongoClient(url);
 

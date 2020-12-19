@@ -5,6 +5,7 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "cd src/server && nodemon index.js",
+    "start-docker": "./scripts/dockerserver.sh",
     "format": "prettier-standard --format",
     "mongo": "./scripts/mongolocal.sh",
     "postinstall": "./scripts/postinstall.sh"

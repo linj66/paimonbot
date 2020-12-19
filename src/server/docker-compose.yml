@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  server:
+    container_name: "paimonbot-server"
+    env_file: 
+      - .env
+    build: .
+    depends_on:
+      - mongo
+  mongo:
+    container_name: "paimonbot-mongo"
+    image: mongo:latest
+    ports: 
+      - "27017:27017"
