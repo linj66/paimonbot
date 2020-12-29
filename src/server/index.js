@@ -1,12 +1,18 @@
 const Commando = require('discord.js-commando')
 const path = require('path')
+const mongo = require('./db/MongoConnection')
 const config = require('./config.json')
-// require('dotenv').config()
+require('dotenv').config()
 
 const client = new Commando.CommandoClient({
   owner: process.env.DISCORD_BOT_OWNER_ID.toString(),
   commandPrefix: config.prefix
 })
+
+async function mongoInit() {
+  await mongo.init()
+}
+mongoInit()
 
 client.on('ready', async () => {
   client.registry

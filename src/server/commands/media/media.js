@@ -1,10 +1,7 @@
 const Commando = require('discord.js-commando')
-const MongoClient = require('mongodb').MongoClient
+const { MediaChannels } = require('../../db/MongoConnection')
 const { mediaStatus } = require('../consts')
 
-const url = 'mongodb://paimonbot-mongo:27017'
-const dbName = 'paimondb';
-const dbClient = new MongoClient(url);
 
 module.exports = class MediaCommand extends Commando.Command {
   constructor (client) {
@@ -33,14 +30,13 @@ module.exports = class MediaCommand extends Commando.Command {
 
     if (status === mediaStatus.ON) {
       message.channel.send(`found channel ${targetChannel}`)
-
+      const channelInfo = { 
+        channelId: targetChannel.id,
+        channelName: targetChannel.name,
+        guildId: targetChannel.guild.id
+      }
       try {
-        await dbClient.connect()
-        const db = dbClient.db(dbName)
-        const collection = db.collection('media_channels')
-        const channelInfo = { channelId: targetChannel.id, channelName: targetChannel.name, guildId: targetChannel.guild.id }
-        const result = await collection.insertOne(channelInfo)
-
+        const result = await MediaChannels.addChannel(channelInfo)
         console.log(`${channelInfo} inserted with _id: ${result.insertedId}`)
         message.channel.send(
           `Subscribed text channel ${targetChannel} to media updates`
@@ -54,11 +50,7 @@ module.exports = class MediaCommand extends Commando.Command {
     } else if (status === mediaStatus.OFF) {
       // db remove entry with guild ID key
       try {
-        await dbClient.connect()
-        const db = dbClient.db(dbName)
-        const collection = db.collection('media_channels')
-        const query = { channelId: targetChannel.id }
-        const result = await collection.deleteOne(query)
+        const result = await MediaChannels.deleteChannel(targetChannel.id)
         if (result.deletedCount === 1) {
           console.log(`removed channel ${targetChannel.id}`)
           message.channel.send(
